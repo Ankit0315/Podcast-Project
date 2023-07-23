@@ -115,6 +115,11 @@ function PodcastDetailsPage() {
           </>
         )}
       </div>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
       {playingFile && (
         <AudioPlayer audioSrc={playingFile} image={podcast.displayImage} />
       )}
