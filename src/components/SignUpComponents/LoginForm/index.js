@@ -3,7 +3,7 @@ import { useState } from 'react';
 import InputComponent from '../../common/Input';
 import Button from '../../common/Button';
 import Header from '../../common/Header';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { signInWithEmailAndPassword,sendPasswordResetEmail } from 'firebase/auth';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { auth, db } from '../../../firebase';
@@ -56,7 +56,28 @@ const LoginForm = () => {
       setLoading(false);
     } 
   };
-
+const handleForgetPass= async () => { 
+  setLoading(true); 
+  if (email) 
+  {
+     try{
+         await sendPasswordResetEmail(auth, email);
+          toast.success("Password reset email sent!");
+           setLoading(false);
+           }
+            catch (error)
+             {
+               console.error("Error sending password reset email:", error); 
+               toast.error(error.message); setLoading(false); 
+              }
+     }
+                else
+                 {
+                   toast.error("Please enter your registered  email address"); 
+                   setLoading(false); 
+                  } 
+ };
+    
 
   return (
     <>
@@ -75,6 +96,8 @@ const LoginForm = () => {
         type="password"
         required={true}
         />
+        
+       <div className="forgot" style={{display:"flex",flexDirection:"row-reverse",justifyContent:"flex-end",alignItems:"end" ,  cursor:"pointer",textDecoration:"underline",textAlign:"right",width:"120px",fontSize:"16px",marginTop:"10px",marginBottom:"10px"}} onClick={handleForgetPass}>Forgot password ?</div>
        
        <Button
         text={loading ? "Loading..." : "Login"}
