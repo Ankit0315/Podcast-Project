@@ -114,7 +114,7 @@
   }
   
   
-  .profileText::before {
+  /* .profileText::before {
     content: "";
     width: 104%;
     height: 102%;
@@ -156,4 +156,4 @@
     100% {
       --rotate: 360deg;
     }
-  }
+  } */
